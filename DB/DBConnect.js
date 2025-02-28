@@ -2,19 +2,23 @@ const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool({
     connectionLimit: 10, 
-    host: 'localhost', 
+    host: 'nozomi.proxy.rlwy.net',  // Host de Railway
+    port: 44095, // Puerto de Railway
     user: 'root',
-    database: 'prueba',
-    nestTables: false, 
+    password: 'WobIpWjilNdXqyqCaZlpqGLJPmhqxuvb', // Contraseña de Railway
+    database: 'railway',
+    waitForConnections: true,
+    queueLimit: 0
 });
 
-pool.getConnection((err, connection) => {
-    if (err) {
+(async () => {
+    try {
+        const connection = await pool.getConnection();
+        console.log('Conectado a la base de datos en Railway');
+        connection.release();
+    } catch (err) {
         console.error('Error de conexión: ', err);
-        return;
     }
-    console.log('Conectado a la base de datos');
-    connection.release(); // libera la conexión de vuelta al pool
-});
+})();
 
 module.exports = pool;
