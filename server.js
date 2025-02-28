@@ -7,7 +7,7 @@ const route = require('./routes/route.js');
 const pool = require('./DB/DBConnect.js');
 
 app.use(cors({
-    origin: 'https://front-prueba-blue.vercel.app/',
+    origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
     allowedHeaders: ['Origin, X-Requested-With, Content-Type, Accept, x-auth-token']    
